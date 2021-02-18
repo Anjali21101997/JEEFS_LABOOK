@@ -1,0 +1,8 @@
+package com.cg.ovs.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class UserRegisterService {
+	
+
+}

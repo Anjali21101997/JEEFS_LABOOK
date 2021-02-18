@@ -1,0 +1,44 @@
+package com.cg.ovs.web;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.service.MapValidationErrorService;
+import com.cg.ovs.service.UserLoginService;
+
+@RestController
+@RequestMapping("ovs/api/login")
+public class UserLoginController {
+	@Autowired
+	UserLoginService userLoginService;
+	@Autowired
+	MapValidationErrorService mapValidationErrorService;
+	@GetMapping("/{emailId}/{password}")
+	public ResponseEntity<?> getProjectById(@PathVariable String emailId,@PathVariable String password)
+	{
+	UserDetail testUser =userLoginService.loginUser(emailId,password);
+	if(testUser!=null)
+	{
+	return new ResponseEntity<String>("Successfully Login"+testUser.getLoginName()+ " !!!!!", HttpStatus.OK);
+}
+	return new ResponseEntity<String>("Enter correct Details !!!!!", HttpStatus.OK);
+}
+	@GetMapping("/viewProfile/{emailId}")
+	public ResponseEntity<?> viewProfile(@Valid @PathVariable String emailId) {
+		UserDetail testUser = userLoginService.viewByEmail(emailId);
+		return new ResponseEntity<UserDetail>(testUser, HttpStatus.OK);
+	}
+	
+
+}

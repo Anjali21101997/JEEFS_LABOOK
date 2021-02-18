@@ -1,0 +1,84 @@
+package com.cg.ovs.domain;
+
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+@Entity
+public class UserDetail {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@NotBlank(message = "Name is Required")
+	@Pattern(regexp = "[a-zA-Z]{5,15}", message = "Name can only have characters with min size of 5 and max of 20")
+	private String name;
+	@NotBlank(message = "Contact is Required")
+	@Pattern(regexp = "(0/91)?[7-9][0-9]{9}", message = "Enter a valid phone number")
+	private String contact;
+	@NotBlank(message = "Email Id is Required")
+    @Column(unique =true,updatable=false)
+	private String emailId;
+	@Size(min=5,max=10,message="Please use 5 to 10 characters for login name")
+	@NotBlank(message = "Login Name is Required")
+	private String loginName;
+	@NotBlank(message = "Login Name is Required")
+	//@Pattern(regexp = "^(?=.*[0-9])\"\r\n" + " + \"(?=.*[a-z])(?=.*[A-Z])\"\r\n"+ " + \"(?=.*[@#$%^&+=])\"\r\n"
+			//+ " + \"(?=\\\\S+$).{8,20}$",message="Enter a valid Password")
+	private String password;
+    @Pattern(regexp = "[1/2]{1}",message="Enter a valid role")
+	private int role;
+	public UserDetail()
+	{
+		
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public int getRole() {
+		return role;
+	}
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+}

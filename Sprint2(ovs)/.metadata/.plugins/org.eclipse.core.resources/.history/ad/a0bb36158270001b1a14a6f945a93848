@@ -1,0 +1,5 @@
+package com.cg.ovs.serviceimpl;
+
+public class UserRegisterServiceImpl {
+
+}

@@ -1,0 +1,19 @@
+package com.cg.ovs.exception;
+
+public class UserEmailExceptionResponse {
+	private String emailId;
+
+	public UserEmailExceptionResponse (String projectIdentifier) {
+		super();
+		this.emailId= emailId;
+	}
+
+	public String getProjectIdentifier() {
+		return emailId;
+	}
+
+	public void setProjectIdentifier(String emailId) {
+		this.emailId = emailId;
+	}
+
+}

@@ -1,0 +1,38 @@
+package com.cg.ovs.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.repository.UserDetailRepository;
+import com.cg.ovs.service.UserForgotPasswordService;
+@Service
+public class UserForgotPasswordServiceImpl implements UserForgotPasswordService {
+	@Autowired
+	UserDetailRepository userDetailRepository;
+
+	@Override
+	public UserDetail updatePassword(UserDetail userDetail) {
+		UserDetail testUser=userDetailRepository.findByEmailId(userDetail.getEmailId());
+		System.out.println(testUser);
+		if(testUser==null)
+		{
+			return null;
+		}
+		else if(!userDetail.getLoginName().equals(testUser.getLoginName()))
+		{
+			return null;
+		}
+		else
+		{
+			testUser.setPassword(userDetail.getPassword());
+			return userDetailRepository.save(testUser);
+		}
+		
+		
+	
+	}
+
+	
+
+}

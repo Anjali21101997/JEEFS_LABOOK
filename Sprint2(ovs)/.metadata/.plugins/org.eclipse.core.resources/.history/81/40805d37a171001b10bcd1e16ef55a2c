@@ -1,0 +1,28 @@
+package com.cg.ovs.serviceimpl;
+
+import java.util.List;
+
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.service.UserAdminService;
+
+public class UserAdminServiceImpl implements UserAdminService {
+
+	@Override
+	public List<UserDetail> viewAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDetail viewByEmail(String emailId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDetail saveOrUpdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

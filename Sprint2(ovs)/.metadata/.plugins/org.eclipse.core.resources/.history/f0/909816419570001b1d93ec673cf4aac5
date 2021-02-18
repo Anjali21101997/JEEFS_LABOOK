@@ -1,0 +1,27 @@
+package com.cg.ovs.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.repository.UserDetailRepository;
+import com.cg.ovs.service.UserLoginService;
+
+public class UserLoginServiceImpl implements UserLoginService {
+ @Autowired
+ UserDetailRepository userDetailRepository;
+	@Override
+	public UserDetail loginUser(String emailId,String password) {
+		UserDetail loginUser=userDetailRepository.findByEmailId(emailId);
+		if(loginUser==null)
+		{
+			return null;
+		}
+		else if(password.equals(password))
+		{
+			return null;
+	
+		}
+		return loginUser;
+	}
+
+}

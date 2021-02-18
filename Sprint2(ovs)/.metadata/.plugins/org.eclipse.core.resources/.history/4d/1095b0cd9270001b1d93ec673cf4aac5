@@ -1,0 +1,5 @@
+package com.cg.ovs.domain;
+
+import javax.persistence.Entity;
+
+

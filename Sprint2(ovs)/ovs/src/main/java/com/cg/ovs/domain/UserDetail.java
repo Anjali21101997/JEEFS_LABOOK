@@ -1,9 +1,5 @@
 package com.cg.ovs.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +7,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 
 @Entity
 public class UserDetail {
@@ -44,9 +41,11 @@ public class UserDetail {
 	private String password;
 	@Min(value=1, message="Role can be 1(Admin) or 2(Customer)")  
 	@Max(value=2, message="Role can be 1(Admin) or 2(Customer)") 
+	@Column(updatable = false)
 	private int role;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userDetail")
-	private List<Address> address =  new ArrayList<>();
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id")
+    private Address address;
 	public UserDetail()
 	{
 		
@@ -94,10 +93,12 @@ public class UserDetail {
 	public void setRole(int role) {
 		this.role = role;
 	}
-	public List<Address> getAddress() {
+
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(List<Address> address) {
+
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -107,6 +108,7 @@ public class UserDetail {
 				+ ", loginName=" + loginName + ", password=" + password + ", role=" + role + ", address=" + address
 				+ "]";
 	}
+
 	
 
 	}

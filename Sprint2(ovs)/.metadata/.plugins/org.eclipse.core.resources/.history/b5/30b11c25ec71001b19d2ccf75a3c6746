@@ -1,0 +1,42 @@
+package com.cg.ovs.serviceimpl;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.Query;
+import com.cg.ovs.domain.Address;
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.repository.AddressRepository;
+import com.cg.ovs.repository.UserDetailRepository;
+import com.cg.ovs.service.UserAdminService;
+@Service
+public class UserAdminServiceImpl implements UserAdminService {
+@Autowired
+UserDetailRepository userDetailRepository;
+@Autowired
+AddressRepository addressRepository;
+	@Override
+	public Iterable<UserDetail> viewAll() {
+		return  userDetailRepository.findAll();
+	}
+
+	@Override
+	public UserDetail viewByEmail(String emailId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDetail saveOrUpdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<UserDetail> viewByCity(String city) {
+		return userDetailRepository.findByCity(city);
+		
+	}
+
+}

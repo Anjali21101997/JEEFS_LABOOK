@@ -1,0 +1,27 @@
+package com.cg.ovs.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cg.ovs.domain.Address;
+import com.cg.ovs.domain.UserDetail;
+import com.cg.ovs.repository.AddressRepository;
+import com.cg.ovs.service.UserAddressService;
+import com.cg.ovs.service.UserAdminService;
+
+public class UserAddressServiceImpl implements UserAddressService{
+@Autowired
+AddressRepository addressRepository;
+	@Override
+	public Address updateAddress(Address address) {
+		Address testAddress=addressRepository.save()
+	}
+
+	@Override
+	public String deleteAddress(Address address, int user_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+}

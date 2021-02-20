@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.ovs.domain.Address;
 import com.cg.ovs.domain.UserDetail;
 import com.cg.ovs.service.MapValidationErrorService;
 import com.cg.ovs.service.UserLoginService;
@@ -27,12 +28,12 @@ public class UserLoginController {
 	@Autowired
 	MapValidationErrorService mapValidationErrorService;
 	@GetMapping("/{emailId}/{password}")
-	public ResponseEntity<?> getProjectById(@PathVariable String emailId,@PathVariable String password)
+	public ResponseEntity<?> userLogin(@PathVariable String emailId,@PathVariable String password)
 	{
 	UserDetail testUser =userLoginService.loginUser(emailId,password);
 	if(testUser!=null)
 	{
-	return new ResponseEntity<String>("Successfully Login"+testUser.getLoginName()+ " !!!!!", HttpStatus.OK);
+	return new ResponseEntity<String>("Successfully Login  "+testUser.getLoginName()+ " !!!!!", HttpStatus.OK);
 }
 	return new ResponseEntity<String>("Enter correct Details !!!!!", HttpStatus.OK);
 }
@@ -50,6 +51,17 @@ public class UserLoginController {
 			return errorMap;
 		}
 		UserDetail testUser = userLoginService.updateProfile(userDetail);
+		return new ResponseEntity<UserDetail>(testUser, HttpStatus.OK);
+	}
+	@PutMapping("/updateAdress/{emailId}")
+	public ResponseEntity<?> updateProfile(@Valid @RequestBody Address address,@PathVariable String emailId, BindingResult result) {
+		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
+		if (errorMap != null)
+		{
+			System.out.println(errorMap);
+			return errorMap;
+		}
+		UserDetail testUser = userLoginService.updateAddress(address, emailId);
 		return new ResponseEntity<UserDetail>(testUser, HttpStatus.OK);
 	}
 	@DeleteMapping("/deleteProfile/{emailId}")

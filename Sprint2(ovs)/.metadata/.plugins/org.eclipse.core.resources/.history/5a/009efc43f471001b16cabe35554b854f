@@ -1,0 +1,15 @@
+package com.cg.ovs.repository;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.cg.ovs.domain.UserDetail;
+
+public interface UserDetailRepository extends CrudRepository<UserDetail,Integer> {
+
+	UserDetail findByEmailId(String emailId);
+	@Query("Select u from UserDetail u where u.role=userRole")
+	Iterable<UserDetail> findByRole(@Param("userRole")int userRole);
+
+}

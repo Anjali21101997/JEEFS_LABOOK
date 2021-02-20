@@ -1,0 +1,5 @@
+package com.cg.ovs.config;
+
+public class SwaggerConfig {
+
+}

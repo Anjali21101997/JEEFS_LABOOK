@@ -1,0 +1,9 @@
+package com.cg.ovs.service;
+
+import com.cg.ovs.domain.Address;
+
+public interface UserAddressService {
+	Address updateAddress(Address address,int user_id);
+	String deleteAddress(Address address,int user_id);
+
+}

@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.ovs.domain.Address;
 import com.cg.ovs.domain.UserDetail;
 import com.cg.ovs.exception.EmailNotFoundException;
 import com.cg.ovs.repository.UserDetailRepository;
@@ -59,6 +60,19 @@ public class UserLoginServiceImpl implements UserLoginService {
 				throw new EmailNotFoundException("Email Id doesn't Exists");
 			}
 		
+	}
+	@Override
+	public UserDetail updateAddress(@Valid Address address,String emailId) {
+		try
+		{
+			UserDetail testUser=userDetailRepository.findByEmailId(emailId);
+			testUser.setAddress(address);
+			return userDetailRepository.save(testUser);
+		}catch(Exception e)
+		{
+			throw new EmailNotFoundException("Email Id doesn't Exists");
+		}
+	
 	}
 	
 

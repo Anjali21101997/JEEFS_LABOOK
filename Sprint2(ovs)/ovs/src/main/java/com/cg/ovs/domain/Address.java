@@ -1,13 +1,10 @@
 package com.cg.ovs.domain;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,28 +12,32 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int addId;
+    private Long id;
 	private String flatNo;
 	private String buildingName;
+	@NotBlank(message="area is required")
 	private String area;
+	@NotBlank(message="city is required")
 	private String city;
+	@NotBlank(message="state is required")
 	private String state;
+	@NotBlank(message="pincode is required")
 	private String pincode;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "userId", updatable = false, nullable = false)
+	@OneToOne(mappedBy="address")
 	@JsonIgnore
 	private UserDetail userDetail;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public UserDetail getUserDetail() {
 		return userDetail;
 	}
 	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;
-	}
-	public int getAddId() {
-		return addId;
-	}
-	public void setAddId(int addId) {
-		this.addId = addId;
 	}
 	public String getFlatNo() {
 		return flatNo;
@@ -76,8 +77,8 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [addId=" + addId + ", flatNo=" + flatNo + ", buildingName=" + buildingName + ", area=" + area
-				+ ", city=" + city + ", state=" + state + ", pincode=" + pincode +"]";
+		return "Address [id=" + id + ", flatNo=" + flatNo + ", buildingName=" + buildingName + ", area=" + area
+				+ ", city=" + city + ", state=" + state + ", pincode=" + pincode + ", userDetail=" + userDetail + "]";
 	}
-
+	
 }
